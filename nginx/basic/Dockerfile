@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+LABEL maintainer="tiagofranco.cloud@gmail.com"
+
 ENV APP_VERSION="1.0.0"
 
 RUN apt-get update \
@@ -11,5 +13,5 @@ WORKDIR /var/www/html
 COPY ./html/index.html /var/www/html/index.html
 
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx"]
+CMD ["-g", "daemon off;"]
