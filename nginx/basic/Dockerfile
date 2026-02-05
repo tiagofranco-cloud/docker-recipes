@@ -1,16 +1,13 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 AS builder
+WORKDIR /site
+COPY ./html/index.html ./index.html
 
-LABEL maintainer="tiagofranco.cloud@gmail.com"
-
-ENV APP_VERSION="1.0.0"
-
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends nginx curl \
-  && rm -rf /var/lib/apt/lists/*
+FROM alpine:3.20
+RUN apk add --no-cache nginx curl
 
 WORKDIR /var/www/html
-
-COPY ./html/index.html /var/www/html/index.html
+COPY --from=builder /site/index.html /var/www/html/index.html
+COPY ./conf/default.conf /etc/nginx/http.d/default.conf
 
 EXPOSE 80
 ENTRYPOINT ["nginx"]
