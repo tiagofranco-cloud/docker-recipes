@@ -21,10 +21,10 @@ The goal is simple:
 
 Each folder represents an isolated real-world scenario.
 
-| Project | Focus |
-|--------|------|
-| `nginx/basic` | Multi-stage builds and image size optimization |
-| `giropops-senhas` | Distroless, Chainguard and DevSecOps hardening |
+| Project | Focus | Docs |
+|--------|------|------|
+| [`nginx/basic`](./nginx/basic) | Multi-stage builds and image size optimization | [README](./nginx/basic/README.md) |
+| [`giropops-senhas`](./giropops-senhas) | Distroless, Chainguard and DevSecOps hardening | [README](./giropops-senhas/README.md) · [Case Study](./CASE-STUDIES/giropops-distroless-hardening.md) |
 
 Each project contains:
 - Optimized Dockerfile
