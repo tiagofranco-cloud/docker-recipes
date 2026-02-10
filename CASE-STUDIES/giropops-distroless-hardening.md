@@ -2,78 +2,82 @@
 
 ## Context
 
-One of the most common problems in real-world container environments is not functionality —  
-it's security and efficiency.
+In real-world container environments, the main challenge is rarely functionality —  
+it's security, efficiency and production readiness.
 
-Many containers run in production today:
-- with unnecessary packages
-- with large attack surface
-- with known vulnerabilities
-- without clear runtime separation
+Many containers running in production today still ship:
+- unnecessary packages
+- large attack surface
+- known vulnerabilities
+- poor runtime separation
 
-This case study documents the process of transforming a functional container into a production-grade hardened image.
+This case study documents the process of transforming a functional container image into a hardened, production-grade artifact using modern DevSecOps practices.
 
 ---
 
 ## Initial State
 
-The original container image:
+The original container image presented a common real-world scenario:
 
-- ~415MB
+- ~415MB image size
 - Multiple HIGH and CRITICAL vulnerabilities
-- Contained build tools
-- Large base image
-- Not optimized for distribution
+- Build tools present in runtime
+- Large and generic base image
 - High attack surface
+- Slow distribution and pull time
 
-It worked.  
-But it was not production-ready.
+The container worked.  
+But it was far from production-ready.
 
 ---
 
 ## Engineering Goals
 
-The objective was not only to make the image smaller.
+The goal was not simply to reduce size.
 
-The real goals:
+The real objectives were:
 
 - Reduce vulnerabilities to zero
 - Minimize runtime footprint
 - Apply DevSecOps mindset
-- Use hardened base images
+- Adopt hardened base images
 - Improve supply chain trust
-- Simulate production-grade container delivery
+- Simulate production-grade delivery standards
+
+This project was approached as if the container would be deployed into a real production environment.
 
 ---
 
 ## Strategy
 
-### Multi-stage build
-Separated build and runtime environments.
+### Multi-stage build separation
+Build and runtime environments were fully separated.
 
 This ensures:
-- build dependencies stay out of final image
+- build dependencies remain outside final image
 - runtime stays minimal
 - smaller SBOM
-- less attack surface
+- reduced attack surface
 
-### Virtualenv isolation
-Python dependencies isolated from system environment.
+### Python virtual environment isolation
+Dependencies were installed inside an isolated virtual environment.
 
 Benefits:
-- predictable runtime
-- no global pollution
-- easier dependency control
+- predictable runtime behavior
+- no system-level pollution
+- controlled dependency scope
 
 ### Distroless Chainguard base image
-The final runtime uses Chainguard's Wolfi-based image.
+The final runtime uses a Chainguard Wolfi-based Python image.
 
 Key advantages:
-- minimal OS footprint
-- continuously patched
-- no package manager
-- no shell
-- reduced CVE exposure
+- minimal operating system footprint
+- continuously patched packages
+- no package manager in runtime
+- no shell available
+- significantly reduced CVE exposure
+
+Only runtime artifacts were copied into the final container.
 
 ---
 
@@ -87,53 +91,73 @@ Key advantages:
 | Production readiness | Low | High |
 
 Validated using:
-- Trivy
-- Docker Scout
+- Trivy vulnerability scanner
+- Docker Scout analysis
 
 ---
 
 ## Security Impact
 
-Smaller images are not just about performance.
+Reducing container size is not just about performance.
 
-They directly impact:
-- CVE exposure
-- SBOM size
-- patching surface
-- pull time in clusters
+It directly affects:
+
+- CVE exposure surface
+- SBOM complexity
+- patching scope
 - registry storage
-- deployment speed
+- network transfer time
+- deployment speed in clusters
 
-A hardened container improves the entire delivery pipeline.
+A hardened container improves not only runtime security but the entire software delivery lifecycle.
 
 ---
 
 ## Lessons Learned
 
-Container engineering is not just about making things run.
+Container engineering goes beyond making applications run.
 
-It's about:
-- making them safe
-- making them predictable
-- making them production-ready
+It requires ensuring they are:
+- secure
+- predictable
+- observable
+- production-ready
 
-Small Dockerfile decisions have large operational impact.
+Small Dockerfile decisions can have significant operational and security impact.
+
+Adopting hardened base images and minimal runtimes should be a default practice in modern DevOps workflows.
 
 ---
 
-## Why this matters for DevOps
+## Why This Matters for DevOps
 
-Modern DevOps is deeply connected with supply chain security.
+Modern DevOps is deeply connected to software supply chain security.
 
 Understanding:
-- base images
+- base image selection
 - runtime composition
 - vulnerability scanning
-- minimal containers
+- minimal container strategies
+- distroless principles
 
 is no longer optional.
 
-It is required for production environments.
+It is a fundamental requirement for production environments.
+
+---
+
+## Evidence
+
+All data and security scans referenced in this case study are available:
+
+- Image size comparison  
+  `../giropops-senhas/scans/image-sizes.txt`
+
+- Trivy scan — vulnerable version  
+  `../giropops-senhas/scans/trivy-v1.0.txt`
+
+- Trivy scan — hardened version  
+  `../giropops-senhas/scans/trivy-v4.0.txt`
 
 ---
 
