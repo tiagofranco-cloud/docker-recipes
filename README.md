@@ -1,16 +1,55 @@
-# Docker Recipes
+# 🐳 Docker Recipes — Production Like DevOps Scenarios
 
-A curated collection of Dockerfiles and containerization patterns for real-world scenarios.
+A curated collection of Dockerfiles and container hardening scenarios focused on real-world DevOps practices.
 
-## Structure
-- `nginx/basic` — Nginx container serving static content
+This repository is part of my public DevOps engineering journey, where I build and document **production-like challenges** involving:
 
-## How to use
-Each folder is a standalone example. Build and run from inside the example directory.
+- Container optimization
+- Security hardening
+- Image size reduction
+- Supply chain security
+- DevSecOps practices
+- Performance and runtime efficiency
 
-Example:
-```bash
-cd nginx/basic
-docker build -t nginx-basic .
-docker run --rm -p 8080:80 nginx-basic
-```
+The goal is simple:
+
+> Build containers as if they were going to production.
+
+---
+
+# 📦 Structure
+
+Each folder represents an isolated real-world scenario.
+
+| Project | Focus |
+|--------|------|
+| `nginx/basic` | Multi-stage builds and image size optimization |
+| `giropops-senhas` | Distroless, Chainguard and DevSecOps hardening |
+
+Each project contains:
+- Optimized Dockerfile
+- Technical explanation
+- Before vs after comparison
+- Security considerations
+
+---
+
+# 🚀 Philosophy
+
+This is not a "Docker study repo".
+
+This is a **DevOps engineering lab** where each container is treated like a production workload.
+
+Focus areas:
+- Reduce attack surface
+- Improve performance
+- Apply security by default
+- Understand tradeoffs
+- Document decisions
+
+---
+
+# 👨‍💻 Author
+
+**Tiago Franco**  
+DevOps Engineer in progress — building in public.

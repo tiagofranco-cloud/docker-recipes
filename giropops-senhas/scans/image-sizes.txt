@@ -1,0 +1,9 @@
+Images collected from local Docker daemon
+
+giropops-senhas:1.0
+- content size: 415MB
+
+giropops-senhas:4.0
+- content size: 31.5MB
+
+Collected on: 2026-02-10
